@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LinkedIn Carousel Designer</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>LinkedIn Carousel Designer</h1>
+      <div class="actions">
+        <button id="addSlideBtn">+ Add Slide</button>
+        <button id="saveBtn">Save Local</button>
+        <button id="downloadBtn" class="primary">Download PDF</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="editor">
+        <div class="tabs" role="tablist">
+          <button class="tab active" data-tab="content">Content</button>
+          <button class="tab" data-tab="style">Style</button>
+          <button class="tab" data-tab="brand">Brand</button>
+          <button class="tab" data-tab="templates">Templates</button>
+        </div>
+
+        <div class="panel active" id="content-panel">
+          <h2>Slides</h2>
+          <div id="slideList" class="slide-list"></div>
+          <p class="note">Hero slide stays first and CTA slide stays last.</p>
+        </div>
+
+        <div class="panel" id="style-panel">
+          <h2>Style Set</h2>
+          <label>Theme preset
+            <select id="themePreset"></select>
+          </label>
+          <div class="three-grid">
+            <label>Primary <input type="color" id="primaryColor" /></label>
+            <label>Secondary <input type="color" id="secondaryColor" /></label>
+            <label>Accent <input type="color" id="accentColor" /></label>
+          </div>
+          <label>Base Font
+            <select id="baseFont">
+              <option value="Inter, Arial, sans-serif">Inter</option>
+              <option value="Montserrat, Arial, sans-serif">Montserrat</option>
+              <option value="Poppins, Arial, sans-serif">Poppins</option>
+              <option value="Lora, Georgia, serif">Lora</option>
+            </select>
+          </label>
+          <label>Heading Font
+            <select id="headingFont">
+              <option value="Poppins, Arial, sans-serif">Poppins</option>
+              <option value="Montserrat, Arial, sans-serif">Montserrat</option>
+              <option value="Playfair Display, Georgia, serif">Playfair Display</option>
+              <option value="Oswald, Arial, sans-serif">Oswald</option>
+            </select>
+          </label>
+          <label>Text Size
+            <input type="range" id="textScale" min="80" max="140" value="100" />
+          </label>
+          <label>Background color for active slide
+            <input type="color" id="slideBg" />
+          </label>
+          <label>Alternate background color
+            <input type="color" id="altBg" />
+          </label>
+        </div>
+
+        <div class="panel" id="brand-panel">
+          <h2>Brand/Footer</h2>
+          <label>Brand name <input id="brandName" type="text" placeholder="@yourbrand" /></label>
+          <label>Footer line <input id="footerText" type="text" placeholder="Follow for more" /></label>
+          <label>Logo emoji/text <input id="logoText" type="text" placeholder="◆" /></label>
+          <label>Safety margin (%)
+            <input type="range" id="safeMargin" min="4" max="18" value="10" />
+          </label>
+        </div>
+
+        <div class="panel" id="templates-panel">
+          <h2>Predefined Templates</h2>
+          <div id="templateList" class="template-list"></div>
+        </div>
+      </section>
+
+      <section class="preview-wrap">
+        <div class="toolbar">
+          <strong>Live Text Formatting:</strong>
+          <button data-cmd="bold"><b>B</b></button>
+          <button data-cmd="italic"><i>I</i></button>
+          <button data-cmd="insertUnorderedList">• List</button>
+        </div>
+        <div id="overflowFlag" class="warning hidden">Content reached safety area. New slide opened.</div>
+        <div id="preview" class="preview" aria-label="Vertical carousel preview"></div>
+      </section>
+    </main>
+  </body>
+</html>
